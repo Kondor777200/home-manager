@@ -18,8 +18,11 @@
   # The home.packages option allows you to install Nix packages into your
   # environment.
   home.packages = with pkgs; [
+    gnupg
+    pass
     libreoffice
     hyprpaper
+    hyprlock
     inkscape nodejs_22
     ferdium
     wev
@@ -48,6 +51,7 @@
     fd
     brightnessctl
     swww
+    grim
     slurp
     wf-recorder
     wl-clipboard
@@ -69,6 +73,12 @@
     nwg-look
     glib
     dconf
+    krita
+    localsend
+    logseq
+    git-credential-manager
+    cargo rustc haskellPackages.webkit2gtk3-javascriptcore
+    sbclPackages.cl-rsvg2
   ];
 
   # Home Manager is pretty good at managing dotfiles. The primary way to manage
@@ -110,6 +120,8 @@
 	  "HYPRCURSOR_SIZE,24"
 	  "XCURSOR_THEME,GoogleDot-Black"
 	  "XCURSOR_SIZE,24"
+    "GCM_CREDENTIAL_STORE,gpg"
+    "NIXPKGS_ALLOW_INSECURE,1"
 	];
         exec-once = [
 	"asztal"
@@ -117,6 +129,7 @@
         monitor = [
 	  ",preferred,auto,1"
 	];
+    debug.disable_logs = false;
         general = {
           gaps_in = 5;
           gaps_out = 5;
@@ -149,6 +162,7 @@
           "$mod, right, movefocus, r"
           "$mod, up, movefocus, u"
           "$mod, down, movefocus, d"
+          "$mod, Print, exec, grim -g ($slurp)"
 	  "$mod, 1, workspace, 1"
 	  "$mod, 2, workspace, 2"
 	  "$mod, 3, workspace, 3"
