@@ -5,6 +5,7 @@
   # manage.
   home.username = "albert";
   home.homeDirectory = "/home/albert";
+  nixpkgs.config.allowUnfree = true;
 
   # This value determines the Home Manager release that your configuration is
   # compatible with. This helps avoid breakage when a new Home Manager release
@@ -79,6 +80,7 @@
     git-credential-manager
     cargo rustc haskellPackages.webkit2gtk3-javascriptcore
     sbclPackages.cl-rsvg2
+    android-studio
   ];
 
   # Home Manager is pretty good at managing dotfiles. The primary way to manage
@@ -103,7 +105,7 @@
       };
 
     };
-
+    programs.java.enable = true;
       programs.git = {
         enable = true;
         userName  = "albertvala";
@@ -122,6 +124,7 @@
 	  "XCURSOR_SIZE,24"
     "GCM_CREDENTIAL_STORE,gpg"
     "NIXPKGS_ALLOW_INSECURE,1"
+    "GTK_THEME=Adwaita:dark"
 	];
         exec-once = [
 	"asztal"
@@ -129,7 +132,6 @@
         monitor = [
 	  ",preferred,auto,1"
 	];
-    debug.disable_logs = false;
         general = {
           gaps_in = 5;
           gaps_out = 5;
@@ -162,7 +164,6 @@
           "$mod, right, movefocus, r"
           "$mod, up, movefocus, u"
           "$mod, down, movefocus, d"
-          "$mod, Print, exec, grim -g ($slurp)"
 	  "$mod, 1, workspace, 1"
 	  "$mod, 2, workspace, 2"
 	  "$mod, 3, workspace, 3"
@@ -183,6 +184,7 @@
 	  "$mod SHIFT, 8, movetoworkspace, 8"
 	  "$mod SHIFT, 9, movetoworkspace, 9"
 	  "$mod SHIFT, 0, movetoworkspace, 10"
+    " , Print, exec, grim -g \"$(slurp -d)\" - | wl-copy"
 	  # window floating
 	  "$mod, V, togglefloating,"
         ];
