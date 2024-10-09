@@ -20,6 +20,7 @@
     (import ./tmux.nix)
     (import ./hyprland.nix)
     (import ./zsh.nix)
+    (import ./alacritty.nix)
   ];
   # The home.packages option allows you to install Nix packages into your
   # environment.

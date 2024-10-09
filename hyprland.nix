@@ -10,7 +10,8 @@
         "XCURSOR_SIZE,24"
         "GCM_CREDENTIAL_STORE,gpg"
         "NIXPKGS_ALLOW_INSECURE,1"
-        "GTK_THEME=Adwaita:dark"
+        "GTK_THEME,Adwaita:dark"
+        "$XDG_CONFIG_HOME,/home/albert/.config"
       ];
       exec-once = [
         "eww open bar"
@@ -22,7 +23,7 @@
         gaps_in = 5;
         gaps_out = 5;
         border_size = 2;
-        "col.active_border" = "rgba(33ccffee) rgba(00ff99ee) 45deg";
+        "col.active_border" = "rgba(47bac0ff) rgba(e4609bff) 45deg";
         "col.inactive_border" = "rgba(595959aa)";
       };
       decoration = {
