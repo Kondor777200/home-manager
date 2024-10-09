@@ -19,6 +19,7 @@
   imports = [
     (import ./tmux.nix)
     (import ./hyprland.nix)
+    (import ./zsh.nix)
   ];
   # The home.packages option allows you to install Nix packages into your
   # environment.
@@ -87,7 +88,6 @@
     dconf
     krita
     localsend
-    logseq
     git-credential-manager
     cargo
     rustc
@@ -95,33 +95,11 @@
     sbclPackages.cl-rsvg2
     android-studio
     tldr
+    anytype
   ];
 
   # Home Manager is pretty good at managing dotfiles. The primary way to manage
   # plain files is through 'home.file'.
-  programs.zsh = {
-    enable = true;
-    enableCompletion = true;
-    autosuggestion.enable = true;
-    syntaxHighlighting.enable = true;
-
-    shellAliases = {
-      ll = "ls -l";
-      update = "sudo nixos-rebuild switch";
-    };
-    initExtra = ''
-      if [ -n "$XDG_SESSION_TYPE" ] && [ -z "$TMUX" ]
-      then
-        tmux
-      fi
-      pfetch
-      eval "$(zoxide init zsh)"
-      eval "$(starship init zsh)";
-    '';
-    history = {
-      size = 10000;
-    };
-  };
   programs.fzf = {
     enable = true;
     enableZshIntegration = true;
@@ -132,27 +110,9 @@
     userName = "albertvala";
     userEmail = "albert.vala@haxagon.cz";
   };
-
-  # Home Manager can also manage your environment variables through
-  # 'home.sessionVariables'. These will be explicitly sourced when using a
-  # shell provided by Home Manager. If you don't want to manage your shell
-  # through Home Manager then you have to manually source 'hm-session-vars.sh'
-  # located at either
-  #
-  #  ~/.nix-profile/etc/profile.d/hm-session-vars.sh
-  #
-  # or
-  #
-  #  ~/.local/state/nix/profiles/profile/etc/profile.d/hm-session-vars.sh
-  #
-  # or
-  #
-  #  /etc/profiles/per-user/albert/etc/profile.d/hm-session-vars.sh
-  #
   home.sessionVariables = {
     # EDITOR = "emacs";
   };
-
   # Let Home Manager install and manage itself.
   programs.home-manager.enable = true;
 }
