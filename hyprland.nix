@@ -14,6 +14,7 @@
         "$XDG_CONFIG_HOME,/home/albert/.config"
       ];
       exec-once = [
+        "hyprpaper"
         "eww open bar"
       ];
       monitor = [

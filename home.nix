@@ -21,6 +21,7 @@
     (import ./hyprland.nix)
     (import ./zsh.nix)
     (import ./alacritty.nix)
+    (import ./hyprpaper.nix)
   ];
   # The home.packages option allows you to install Nix packages into your
   # environment.
@@ -39,7 +40,7 @@
     nodejs_22
     ferdium
     wev
-    pfetch-rs
+    nerdfetch
     starship
     zoxide
     zsh
@@ -97,6 +98,7 @@
     android-studio
     tldr
     anytype
+    killall
   ];
 
   # Home Manager is pretty good at managing dotfiles. The primary way to manage

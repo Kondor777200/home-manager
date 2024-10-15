@@ -10,7 +10,7 @@
       update = "sudo nixos-rebuild switch";
     };
     initExtra = ''
-      pfetch
+      nerdfetch -e
       eval "$(zoxide init zsh)"
       eval "$(starship init zsh)";
     '';
