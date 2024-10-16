@@ -7,11 +7,11 @@
 
     preload = [
       "/home/albert/Pictures/Wallpapers/wallhaven-rrl8rw.png"
-      "/home/albert/Pictures/Wallpapers/wallhaven-6dr6e7.jpg"
+      "/home/albert/Pictures/Wallpapers/wallhaven-vq6lk3.jpg"
     ];
 
     wallpaper = [
-      "eDP-1,/home/albert/Pictures/Wallpapers/wallhaven-6dr6e7.jpg"
+      "eDP-1,/home/albert/Pictures/Wallpapers/wallhaven-vq6lk3.jpg"
     ];
   };
 }

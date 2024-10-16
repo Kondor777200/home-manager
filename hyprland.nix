@@ -47,9 +47,10 @@
       "$mod" = "SUPER";
       bind = [
         # launch apps
-        "$mod, Q, exec, alacritty"
+        "$mod, L, exec, hyprlock"
+        "$mod, Q, exec, kitty"
         "$mod, F, exec, firefox-developer-edition"
-        "$mod, SPACE, exec, nwg-drawer"
+        "$mod, SPACE, exec, ./.config/rofi/scripts/launcher_t7"
         # kill active
         "$mod, C, killactive,"
         # movefocus

@@ -22,10 +22,15 @@
     (import ./zsh.nix)
     (import ./alacritty.nix)
     (import ./hyprpaper.nix)
+    (import ./kitty.nix)
   ];
   # The home.packages option allows you to install Nix packages into your
   # environment.
   home.packages = with pkgs; [
+    kitty
+    viu
+    scrcpy
+    rofi-wayland
     alejandra
     fd
     fzf
