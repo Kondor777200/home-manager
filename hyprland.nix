@@ -16,6 +16,7 @@
       exec-once = [
         "hyprpaper"
         "eww open bar"
+        "udiskie"
       ];
       monitor = [
         ",preferred,auto,1"
@@ -49,7 +50,7 @@
         # launch apps
         "$mod, L, exec, hyprlock"
         "$mod, Q, exec, kitty"
-        "$mod, F, exec, firefox-developer-edition"
+        "$mod, F, exec, zen"
         "$mod, SPACE, exec, ./.config/rofi/scripts/launcher_t7"
         # kill active
         "$mod, C, killactive,"

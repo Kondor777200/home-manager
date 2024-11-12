@@ -27,6 +27,9 @@
   # The home.packages option allows you to install Nix packages into your
   # environment.
   home.packages = with pkgs; [
+    udiskie
+    zed-editor
+    bottom
     kitty
     viu
     scrcpy
@@ -118,6 +121,7 @@
     userName = "albertvala";
     userEmail = "albert.vala@haxagon.cz";
   };
+  services.udiskie.enable = true;
   home.sessionVariables = {
     # EDITOR = "emacs";
   };

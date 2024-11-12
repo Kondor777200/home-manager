@@ -6,7 +6,7 @@
     splash_offset = 2.0;
 
     preload = [
-      "/home/albert/Pictures/Wallpapers/wallhaven-rrl8rw.png"
+      "/home/albert/Pictures/Wallpapers/wallhaven-we98zq.jpg"
       "/home/albert/Pictures/Wallpapers/wallhaven-vq6lk3.jpg"
     ];
 
