@@ -9,186 +9,31 @@
   imports = [
     # Include the results of the hardware scan.
     ./hardware-configuration.nix
-    <home-manager/nixos>
   ];
   nixpkgs.config.allowUnfree = true;
   xdg.portal = {
     enable = true;
     extraPortals = [pkgs.xdg-desktop-portal-gtk];
   };
+
+  environment.variables = {
+    XDG_SESSION_TYPE = "wayland";
+    XDG_CURRENT_DESKTOP = "Hyprland";
+  };
+
   environment.shells = with pkgs; [zsh];
 
-  home-manager.users.albert = {pkgs, ...}: {
-    home.stateVersion = "24.05";
-    home.packages = with pkgs; [
-      libreoffice
-      hyprpaper
-      inkscape
-      nodejs_22
-      ferdium
-      wev
-      pfetch-rs
-      starship
-      zoxide
-      zsh
-      adwaita-icon-theme
-      morewaita-icon-theme
-      nwg-drawer
-      openssl
-      nwg-dock-hyprland
-      unzip
-      gcc
-      git
-      vscodium
-      nodePackages.pnpm
-      firefox-devedition-bin
-      btop
-      zsh
-      neovim
-      alacritty
-      #ags shit
-      ags
-      bun
-      dart-sass
-      fd
-      brightnessctl
-      swww
-      slurp
-      wf-recorder
-      wl-clipboard
-      wayshot
-      swappy
-      hyprpicker
-      pavucontrol
-      networkmanager
-      gtk3
-      haskellPackages.gi-dbusmenugtk3
-      alsa-utils
-      alsa-lib
-      alsa-firmware
-      alsa-plugins
-      lsof
-      linux-firmware
-      sof-firmware
-      google-cursor
-      nwg-look
-      glib
-      dconf
-    ];
-
-    programs.zsh = {
-      enable = true;
-      enableCompletion = true;
-      autosuggestion.enable = true;
-      syntaxHighlighting.enable = true;
-
-      shellAliases = {
-        ll = "ls -l";
-        update = "sudo nixos-rebuild switch";
-      };
-      initExtra = ''
-        pfetch
-        eval "$(zoxide init zsh)"
-        eval "$(starship init zsh)";
-      '';
-      history = {
-        size = 10000;
-      };
-    };
-
-    programs.git = {
-      enable = true;
-      userName = "albertvala";
-      userEmail = "albert.vala@haxagon.cz";
-    };
-
-    wayland.windowManager.hyprland = {
-      enable = true;
-      xwayland.enable = true;
-      settings = {
-        env = [
-          "HYPRCURSOR_THEME,GoogleDot-Black"
-          "HYPRCURSOR_SIZE,24"
-          "XCURSOR_THEME,GoogleDot-Black"
-          "XCURSOR_SIZE,24"
-        ];
-        exec-once = [
-          "asztal"
-        ];
-        monitor = [
-          ",preferred,auto,1"
-        ];
-        general = {
-          gaps_in = 5;
-          gaps_out = 5;
-          border_size = 2;
-          "col.active_border" = "rgba(33ccffee) rgba(00ff99ee) 45deg";
-          "col.inactive_border" = "rgba(595959aa)";
-        };
-        decoration = {
-          rounding = 5;
-        };
-        input = {
-          touchpad = {
-          };
-        };
-        gestures = {
-          workspace_swipe = true;
-          workspace_swipe_use_r = true;
-        };
-
-        "$mod" = "SUPER";
-        bind = [
-          # launch apps
-          "$mod, Q, exec, alacritty"
-          "$mod, F, exec, firefox-developer-edition"
-          "$mod, SPACE, exec, nwg-drawer"
-          # kill active
-          "$mod, C, killactive,"
-          # movefocus
-          "$mod, left, movefocus, l"
-          "$mod, right, movefocus, r"
-          "$mod, up, movefocus, u"
-          "$mod, down, movefocus, d"
-          "$mod, 1, workspace, 1"
-          "$mod, 2, workspace, 2"
-          "$mod, 3, workspace, 3"
-          "$mod, 4, workspace, 4"
-          "$mod, 5, workspace, 5"
-          "$mod, 6, workspace, 6"
-          "$mod, 7, workspace, 7"
-          "$mod, 8, workspace, 8"
-          "$mod, 9, workspace, 9"
-          "$mod, 0, workspace, 10"
-          "$mod SHIFT, 1, movetoworkspace, 1"
-          "$mod SHIFT, 2, movetoworkspace, 2"
-          "$mod SHIFT, 3, movetoworkspace, 3"
-          "$mod SHIFT, 4, movetoworkspace, 4"
-          "$mod SHIFT, 5, movetoworkspace, 5"
-          "$mod SHIFT, 6, movetoworkspace, 6"
-          "$mod SHIFT, 7, movetoworkspace, 7"
-          "$mod SHIFT, 8, movetoworkspace, 8"
-          "$mod SHIFT, 9, movetoworkspace, 9"
-          "$mod SHIFT, 0, movetoworkspace, 10"
-          # window floating
-          "$mod, V, togglefloating,"
-        ];
-        bindm = [
-          "$mod, mouse:272, movewindow"
-          "$mod, mouse:273, resizewindow"
-        ];
-      };
-    };
-  };
-
-  hardware.opengl.extraPackages = [
+  hardware.graphics.extraPackages = [
     pkgs.amdvlk
   ];
-  hardware.opengl = {
+  hardware.graphics = {
     enable = true;
-    driSupport32Bit = true;
+    enable32Bit = true;
   };
-
+  services.power-profiles-daemon.enable = true;
+  services.devmon.enable = true;
+  services.gvfs.enable = true;
+  services.udisks2.enable = true;
   # Pipewire shit
   security.rtkit.enable = true;
   services.pipewire = {
@@ -207,7 +52,7 @@
   #fonts
   fonts.packages = with pkgs; [
     noto-fonts
-    noto-fonts-cjk
+    noto-fonts-cjk-sans
     noto-fonts-emoji
     liberation_ttf
     fira-code
@@ -221,13 +66,17 @@
   boot.loader.grub.efiSupport = true;
   boot.loader.grub.useOSProber = true;
   boot.loader.efi.canTouchEfiVariables = true;
-
+  virtualisation.docker.enable = true;
+  services.displayManager.ly.enable = true;
+  services.gnome.gnome-keyring.enable = true;
   boot.kernelParams = [
     "quiet"
     "splash"
     "radeon.audio=1"
   ];
-
+  boot.kernelPackages = pkgs.linuxPackages_latest;
+  programs.hyprlock.enable = true;
+  programs.hyprland.enable = true;
   networking.hostName = "nixos"; # Define your hostname.
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
 
@@ -258,19 +107,20 @@
 
   # Configure keymap in X11
   services.xserver = {
-    layout = "us";
-    xkbVariant = "";
+    xkb.layout = "us";
+    xkb.variant = "";
   };
 
   nix.settings.experimental-features = ["nix-command" "flakes"];
 
   # Define a user account. Don't forget to set a password with ‘passwd’.
   programs.zsh.enable = true;
+  programs.adb.enable = true;
   users.defaultUserShell = pkgs.zsh;
   users.users.albert = {
     isNormalUser = true;
     description = "Albert";
-    extraGroups = ["networkmanager" "wheel" "video" "pipewire"];
+    extraGroups = ["networkmanager" "wheel" "video" "pipewire" "kvm" "adbusers" "docker"];
     packages = with pkgs; [];
   };
 
@@ -279,6 +129,38 @@
   environment.systemPackages = with pkgs; [
     #  vim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
     #  wget
+    xdg-desktop-portal
+    xdg-desktop-portal-gtk
+    xdg-desktop-portal-wlr
+    clang
+    linuxHeaders
+    polkit
+    polkit_gnome
+  ];
+  security.polkit.enable = true;
+
+  security.polkit.extraConfig = ''
+    polkit.addRule(function(action, subject) {
+      if (
+        subject.isInGroup("users")
+          && (
+            action.id == "org.freedesktop.login1.reboot" ||
+            action.id == "org.freedesktop.login1.reboot-multiple-sessions" ||
+            action.id == "org.freedesktop.login1.power-off" ||
+            action.id == "org.freedesktop.login1.power-off-multiple-sessions"
+          )
+        )
+      {
+        return polkit.Result.YES;
+      }
+    });
+  '';
+
+  programs.nix-ld.enable = true;
+  programs.nix-ld.libraries = with pkgs; [
+    clang
+    # Add any missing dynamic libraries for unpackaged programs
+    # here, NOT in environment.systemPackages
   ];
 
   # Some programs need SUID wrappers, can be configured further or are
@@ -299,6 +181,21 @@
   # networking.firewall.allowedUDPPorts = [ ... ];
   # Or disable the firewall altogether.
   # networking.firewall.enable = false;
+  systemd = {
+    user.services.polkit-gnome-authentication-agent-1 = {
+      description = "polkit-gnome-authentication-agent-1";
+      wantedBy = ["graphical-session.target"];
+      wants = ["graphical-session.target"];
+      after = ["graphical-session.target"];
+      serviceConfig = {
+        Type = "simple";
+        ExecStart = "${pkgs.polkit_gnome}/libexec/polkit-gnome-authentication-agent-1";
+        Restart = "on-failure";
+        RestartSec = 1;
+        TimeoutStopSec = 10;
+      };
+    };
+  };
 
   # This value determines the NixOS release from which the default
   # settings for stateful data, like file locations and database versions
