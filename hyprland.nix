@@ -12,6 +12,8 @@
         "NIXPKGS_ALLOW_INSECURE,1"
         "GTK_THEME,Adwaita:dark"
         "$XDG_CONFIG_HOME,/home/albert/.config"
+        "WAYLAND_DISPLAY,wayland-0"
+        "XDG_SESSION_TYPE,wayland"
       ];
       exec-once = [
         "hyprpaper"

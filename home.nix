@@ -27,6 +27,7 @@
   # The home.packages option allows you to install Nix packages into your
   # environment.
   home.packages = with pkgs; [
+    gjs
     udiskie
     zed-editor
     bottom
@@ -67,10 +68,6 @@
     zsh
     neovim
     alacritty
-    #ags shit
-    ags
-    bun
-    dart-sass
     fd
     brightnessctl
     swww
