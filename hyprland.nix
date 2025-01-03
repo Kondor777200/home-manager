@@ -1,4 +1,8 @@
-{pkgs, ...}: {
+{
+  pkgs,
+  inputs,
+  ...
+}: {
   wayland.windowManager.hyprland = {
     enable = true;
     xwayland.enable = true;
@@ -12,11 +16,12 @@
         "NIXPKGS_ALLOW_INSECURE,1"
         "GTK_THEME,Adwaita:dark"
         "$XDG_CONFIG_HOME,/home/albert/.config"
+        "AMD_VULKAN_ICD,RADV"
       ];
       exec-once = [
-        "hyprpaper"
-        "eww open bar"
+        "hyprpanel"
         "udiskie"
+        "dbus-update-activation-environment --system --all"
       ];
       monitor = [
         ",preferred,auto,1"
