@@ -1,6 +1,7 @@
 {
   config,
   pkgs,
+  gBar,
   ...
 }: {
   # Home Manager needs a bit of information about you and the paths it should
@@ -23,10 +24,13 @@
     (import ./alacritty.nix)
     (import ./hyprpaper.nix)
     (import ./kitty.nix)
+    gBar.homeManagerModules.x86_64-linux.default
   ];
   # The home.packages option allows you to install Nix packages into your
   # environment.
   home.packages = with pkgs; [
+    bluetui
+    blender
     gjs
     udiskie
     zed-editor
@@ -36,8 +40,6 @@
     scrcpy
     rofi-wayland
     alejandra
-    fd
-    fzf
     eww
     lazygit
     gnupg
@@ -99,7 +101,6 @@
     cargo
     rustc
     haskellPackages.webkit2gtk3-javascriptcore
-    sbclPackages.cl-rsvg2
     android-studio
     tldr
     anytype
@@ -108,6 +109,19 @@
 
   # Home Manager is pretty good at managing dotfiles. The primary way to manage
   # plain files is through 'home.file'.
+  programs.gBar = {
+    enable = true;
+    config = {
+      Location = "T";
+      EnableSNI = true;
+      SNIIconSize = {
+        Discord = 26;
+        OBS = 23;
+      };
+      WorkspaceSymbols = [" " " "];
+    };
+  };
+
   programs.fzf = {
     enable = true;
     enableZshIntegration = true;

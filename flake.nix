@@ -1,5 +1,5 @@
 {
-  description = "Home Manager configuration of albert";
+  description = "Home Manager configuration for albert";
 
   inputs = {
     # Specify the source of Home Manager and Nixpkgs.
@@ -8,11 +8,13 @@
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    gBar.url = "github:scorpion-26/gBar";
   };
 
   outputs = {
     nixpkgs,
     home-manager,
+    gBar,
     ...
   }: let
     system = "x86_64-linux";
@@ -25,8 +27,10 @@
       # the path to your home.nix.
       modules = [./home.nix];
 
-      # Optionally use extraSpecialArgs
-      # to pass through arguments to home.nix
+      # Optionally pass extra special arguments to home.nix
+      extraSpecialArgs = {
+        inherit gBar; # Example argument
+      };
     };
   };
 }
